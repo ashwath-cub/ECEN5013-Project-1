@@ -7,7 +7,7 @@ uint8_t my_memmove(uint8_t *src, uint8_t *dst, uint32_t length)
 {
    
    uint32_t index;                                                       //32 bit unsigned index to track 32 bit max data length                                                                   
-   if(src==NULL || length>429496796)                                      //tests for input data.
+   if(src==NULL)                                    //tests for input data.  Cannot detect if length exceeds 2^32-1
    {
        printf("\n\n\t\tError, move failed. Recheck Source pointer and/or the length");
        return 1;
@@ -39,9 +39,9 @@ uint8_t my_memmove(uint8_t *src, uint8_t *dst, uint32_t length)
 
 uint8_t my_memzero(uint8_t* src, uint32_t length)
 {
-    if(src==NULL || length>429496796)                                      //tests for input data.
+    if(src==NULL)                                      //tests for input data.
    {
-       printf("\n\n\t\tError, move failed. Recheck Source pointer and/or the length");
+       printf("\n\n\t\tError, move failed. Recheck Source pointer");
        return 1;
    }
    uint32_t index;
@@ -55,10 +55,10 @@ uint8_t my_memzero(uint8_t* src, uint32_t length)
 uint8_t my_reverse(uint8_t *src, uint32_t length)
 {
         if(length<0) //Failure. negative length makes no sense. Non-zero value is returned. Also tests for (length>2147483648)
-                return '1';
+                return 1;
 
         if(src==NULL) //Failure. The length and/or the address passed are incorrect.
-                return '2';
+                return 2;
 
         uint32_t index; //index to run the For loop below.
         uint8_t temp; //temp variable to facilitate exchange
@@ -69,9 +69,17 @@ uint8_t my_reverse(uint8_t *src, uint32_t length)
                 *(src+index)=*(src+length-(index+1));
                 *(src+length-(index+1))=temp;
         }
-        return '0';
+        return 0;
 }
 
 
 
+void dump_memory(uint8_t *start,uint32_t length)
+{
+ 
+
+
+
+
+   
 
