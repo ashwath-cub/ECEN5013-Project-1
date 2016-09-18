@@ -1,3 +1,5 @@
+/*Declaring the functions that are defined in memory.c*/
+
 #include<stdint.h>
 
 #ifndef prototype
