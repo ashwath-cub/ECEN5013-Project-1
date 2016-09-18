@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include "data.h"
 
 int32_t my_atoi(int8_t*str)
 {

@@ -3,7 +3,7 @@
 #include<stdint.h>
 #include"memory.h"
 
-uint8_t my_memmove(uint8_t *src, uint8_t *dst, uint32_t length)
+uint8_t my_memmove(uint8_t* src, uint8_t* dst, uint32_t length)
 {
    
    uint32_t index;                                                       //32 bit unsigned index to track 32 bit max data length                                                                   
@@ -22,7 +22,7 @@ uint8_t my_memmove(uint8_t *src, uint8_t *dst, uint32_t length)
        {                                                                 //start from the top
           *(dst+length-index)=*(src+length-index);                  
        }
-       *(dst+index)='\0';
+     
    }
    else if(dst-src<0)                      
    {   
@@ -30,8 +30,7 @@ uint8_t my_memmove(uint8_t *src, uint8_t *dst, uint32_t length)
        {                                               			 //start from the bottom
          *(dst+index)=*(src+index);       
        }
-       *(dst+index)='\0';
-   }
+    }
    else                                                              
        dst=src;
    return 0;                                                              //succesful move
@@ -47,12 +46,12 @@ uint8_t my_memzero(uint8_t* src, uint32_t length)
    uint32_t index;
    for(index=0; index<length; index++)
    {
-      *(src+index)='\0';
+      *(src+index)=0;
    }
 } 
 
 
-uint8_t my_reverse(uint8_t *src, uint32_t length)
+uint8_t my_reverse(uint8_t* src, uint32_t length)
 {
         if(length<0) //Failure. negative length makes no sense. Non-zero value is returned. Also tests for (length>2147483648)
                 return 1;
@@ -74,8 +73,8 @@ uint8_t my_reverse(uint8_t *src, uint32_t length)
 
 
 
-void dump_memory(uint8_t *start,uint32_t length)
-{
+
+
  
 
 
