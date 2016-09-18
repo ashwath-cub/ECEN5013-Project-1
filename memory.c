@@ -53,15 +53,13 @@ uint8_t my_memzero(uint8_t* src, uint32_t length)
 
 uint8_t my_reverse(uint8_t* src, uint32_t length)
 {
-        if(length<0) //Failure. negative length makes no sense. Non-zero value is returned. Also tests for (length>2147483648)
-                return 1;
 
         if(src==NULL) //Failure. The length and/or the address passed are incorrect.
                 return 2;
-
         uint32_t index; //index to run the For loop below.
         uint8_t temp; //temp variable to facilitate exchange
-
+      
+       
         for(index=0;index<length/2;index++) //method to reverse the string; exchange elements //about the mid-point
         {
                 temp=*(src+index);
@@ -70,15 +68,3 @@ uint8_t my_reverse(uint8_t* src, uint32_t length)
         }
         return 0;
 }
-
-
-
-
-
- 
-
-
-
-
-   
-
