@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdint.h>
 #include<stdlib.h>
-#include "project.h"
+#include "../headers/project.h"
 
 void main()
 {

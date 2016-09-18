@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "project.h"
-#include "memory.h"
+#include "../headers/project.h"
+#include "../headers/memory.h"
 #include<stdint.h>
 
 void project_1_report()
