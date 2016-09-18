@@ -10,10 +10,6 @@ int32_t my_atoi(int8_t*str)
    return result;
 }
 
-
-
-
-
 void dump_memory(uint8_t *start,uint32_t length)
 {
    uint8_t i;
@@ -44,5 +40,40 @@ uint32_t little_to_big(uint32_t	data)
   
    return result;
 
+}
+
+int8_t* my_itoa(int8_t* str, int32_t data, int32_t base)
+{
+   int16_t index, i;
+   int32_t datacpy=data;
+   if (base<0)
+   {
+      printf("The base value is negative which doesn't make sense. Re-enter the base value.");
+      return 1;
+   }
+
+   for(index=0; data!=0; index++)
+   {
+      *(str+index)=data%base;
+       data=data/base;
+       printf("%d\t", *(str+index));
+   }
+   printf("%d\n", index);
+
+   my_reverse(str, index);
+   if (datacpy<0)
+   {
+      for(i=0; i<index-1; i++)
+      {
+         *(str+index-i)=*(str+index-i-1);     //shifting by one byte so as to make room for the negative sign.
+      }
+      *(str)=-;
+   }
+
+   for(i=0; i<index; i++)
+   {
+      printf("%d\t",*(str+i));
+   }
+   return NULL;
 }
 
