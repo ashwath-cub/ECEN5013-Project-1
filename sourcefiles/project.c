@@ -4,8 +4,8 @@ Purpose: This file contains the definition of one function that is,project_1_rep
 
 
 #include <stdio.h>
-#include "project.h"
-#include "memory.h"
+#include "../headers/project.h"
+#include "../headers/memory.h"
 #include<stdint.h>
 
 

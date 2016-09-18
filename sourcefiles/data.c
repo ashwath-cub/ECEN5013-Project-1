@@ -5,7 +5,9 @@ Purpose:This file contains 5 functions-atoi,itoa,dump_memory,big_to little and l
 
 /*Inclusion of header files*/
 #include<stdio.h>
-#include "data.h"
+#include<stdint.h>
+#include "../headers/data.h"
+#include"../headers/memory.h"
 
 /*Function to convert ASCII to Integer */
 int32_t my_atoi(int8_t*str)
@@ -25,8 +27,13 @@ void dump_memory(uint8_t *start,uint32_t length)
    
    for(i=0; i<length;i++)
    {
+<<<<<<< HEAD:data.c
       printf("%p",start);                                                //printing the addresses
       start++;                                             
+=======
+      printf("%p",start);
+      start++;
+>>>>>>> 8a31da34d04b0ebee840aa544d5990f8dda4ca72:sourcefiles/data.c
    }
 }
 
@@ -36,12 +43,15 @@ uint32_t big_to_little(uint32_t data)
 {
    uint32_t result;
    
+<<<<<<< HEAD:data.c
    /*1st,4th and 2nd,3rd bytes exchanging positions*/
    result=(((data>>24) | ((data>>8) & 0x0000ff00) | ((data<<8) & 0x00ff0000) | ((data<<24) & 0xff000000));
+=======
+   result=((data>>24) | ((data>>8) & 0x0000ff00) | ((data<<8) & 0x00ff0000) | ((data<<24) & 0xff000000));
+>>>>>>> 8a31da34d04b0ebee840aa544d5990f8dda4ca72:sourcefiles/data.c
 
    
    return result;
-
 }
 
 
@@ -54,7 +64,6 @@ uint32_t little_to_big(uint32_t	data)
    result=((data & 0x000000FF) << 24) | ((data & 0x0000FF00)<<8) | ((data >> 8) & 0x0000FF00) | (data >> 24);
   
    return result;
-
 }
 
 
@@ -86,7 +95,7 @@ int8_t* my_itoa(int8_t* str, int32_t data, int32_t base)
       {
          *(str+index-i)=*(str+index-i-1);     //shifting by one byte so as to make room for the negative sign.
       }
-      *(str)=-;
+      *(str)='-';
    }
 
    for(i=0; i<index; i++)

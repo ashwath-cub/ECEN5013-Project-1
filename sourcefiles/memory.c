@@ -5,7 +5,7 @@ Purpose: This file is used to define 3 functions-memzero, memmove and reverse wh
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdint.h>
-#include"memory.h"
+#include"../headers/memory.h"
 
 
 /*Function to move the memory bytes from the source to the destination for the length specified*/
