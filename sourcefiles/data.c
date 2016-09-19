@@ -7,15 +7,19 @@ Purpose:This file contains 5 functions-atoi,itoa,dump_memory,big_to little and l
 #include<stdio.h>
 #include<stdint.h>
 #include "../headers/data.h"
-#include"../headers/memory.h"
+#include "../headers/memory.h"
 
 /*Function to convert ASCII to Integer */
 int32_t my_atoi(int8_t*str)
 {
-   int index, result=0;                                                   //index to track the string
-   for(index=0;*(str+index)>='0' && *(str+index)<='9';++index)            //loop to form the number 
-      result=result*10 +(*(str+index)-'0');
-   printf("\n\n%d", result);
+   int index, flag=0,result=0;
+   if(*str=='-')
+   flag=1;                                                   //index to track the string
+   for(index=0;*(str+flag+index)>='0' && *(str+flag+index)<='9';++index)            //loop to form the number 
+      result=result*10 +(*(str+flag+index)-'0');
+   if(flag==1)
+   result *=-1;
+   printf("String=%s\nResult:%d\n",str,result);
    return result;
 }
 
@@ -24,33 +28,28 @@ int32_t my_atoi(int8_t*str)
 void dump_memory(uint8_t *start,uint32_t length)
 {
    uint8_t i;
+   printf("String=%s\t Length=%d\n",start,length);
    
+   printf("Addresses\n");
    for(i=0; i<length;i++)
    {
-<<<<<<< HEAD:data.c
-      printf("%p",start);                                                //printing the addresses
-      start++;                                             
-=======
-      printf("%p",start);
-      start++;
->>>>>>> 8a31da34d04b0ebee840aa544d5990f8dda4ca72:sourcefiles/data.c
-   }
-}
 
+      printf("%p\t",start);                                                //printing the addresses
+      start++;                                             
+
+   }
+
+}
 
 /*Function to convert a BigEndian formatted data to littleEndian formatted data*/
 uint32_t big_to_little(uint32_t data)
 {
    uint32_t result;
    
-<<<<<<< HEAD:data.c
-   /*1st,4th and 2nd,3rd bytes exchanging positions*/
-   result=(((data>>24) | ((data>>8) & 0x0000ff00) | ((data<<8) & 0x00ff0000) | ((data<<24) & 0xff000000));
-=======
-   result=((data>>24) | ((data>>8) & 0x0000ff00) | ((data<<8) & 0x00ff0000) | ((data<<24) & 0xff000000));
->>>>>>> 8a31da34d04b0ebee840aa544d5990f8dda4ca72:sourcefiles/data.c
 
-   
+   /*1st,4th and 2nd,3rd bytes exchanging positions*/ 
+   result=((data>>24) | ((data>>8) & 0x0000ff00) | ((data<<8) & 0x00ff0000) | ((data<<24) & 0xff000000));
+  
    return result;
 }
 
@@ -77,14 +76,14 @@ int8_t* my_itoa(int8_t* str, int32_t data, int32_t base)
       printf("The base value is negative which doesn't make sense. Re-enter the base value.");
       return NULL;
    }
-
+   printf("Data=%d\tBase=%d\nResult\n",data,base);
    for(index=0; data!=0; index++)
    {
       *(str+index)=data%base;
        data=data/base;
-       printf("%d\t", *(str+index));
+       printf("%d\t",*(str+index));
    }
-   printf("%d\n", index);
+   
 
    my_reverse(str, index);//reversing the string 
 
@@ -98,10 +97,6 @@ int8_t* my_itoa(int8_t* str, int32_t data, int32_t base)
       *(str)='-';
    }
 
-   for(i=0; i<index; i++)
-   {
-      printf("%d\t",*(str+i));
-   }
    return str;
 }
 
