@@ -1,8 +1,14 @@
+/*Author:Sayan Barman and Ashwath Gundepally
+Purpose: This file is used to define 3 functions-memzero, memmove and reverse which would be used in project.c to achieve the desired output*/
+
+/*Including header files*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdint.h>
 #include"../headers/memory.h"
 
+
+/*Function to move the memory bytes from the source to the destination for the length specified*/
 uint8_t my_memmove(uint8_t* src, uint8_t* dst, uint32_t length)
 {
    
@@ -36,6 +42,11 @@ uint8_t my_memmove(uint8_t* src, uint8_t* dst, uint32_t length)
    return 0;                                                              //succesful move
 }
 
+
+
+
+
+/*Function to initialize the memory to zero from the source address to the length specified*/
 uint8_t my_memzero(uint8_t* src, uint32_t length)
 {
     if(src==NULL)                                      //tests for input data.
@@ -51,6 +62,11 @@ uint8_t my_memzero(uint8_t* src, uint32_t length)
 } 
 
 
+
+
+
+
+/*Function to reverse the consecutive memory bytes starting from the source address till the length specified*/
 uint8_t my_reverse(uint8_t* src, uint32_t length)
 {
 
