@@ -1,16 +1,5 @@
 #Author: Ashwath Gundepally, Sayan Barman
-
-vpath %.c sourcefiles
-vpath %.h headers
-
-
-objects= main.o project.o data.o memory.o
-platform=GCC;
-CC=gcc
-CFLAGS=-Wall -g
-LDFLAGS=-Wl,-Map=
-prepocessed= main.i project.i data.i memory.i
-asmfiles= main.s project.s data.s memory.s
+include sources.mk
 
 
 ifeq ($(platform), ARM_LINUX)
@@ -23,6 +12,8 @@ build: $(objects)
 	$(CC) $(objects) -o project $(LDFLAGS)project.map
 
 compile-all: $(objects)
+
+
 
 main.o: main.c project.h
 	$(CC) -c $(CFLAGS) $< 
@@ -44,20 +35,30 @@ memory.i: memory.c memory.h
 data.i: data.c data.h memory.h
 	$(CC) -E $<
 
+
 asm-file: $(asmfiles)
 
-main.S: main.c project.h
+main.s: main.c project.h
 	$(CC) -S $<
-project.S: project.c memory.h project.h
+project.s: project.c memory.h project.h
 	$(CC) -S $<
-memory.S: memory.c memory.h
+memory.s: memory.c memory.h
 	$(CC) -S $<
-data.S: data.c data.h memory.h
+data.s: data.c data.h memory.h
 	$(CC) -S $<
 	
+upload:
+	ssh $(BBB_connect) "rm -rf /home/debian/bin/release"
+	ssh $(BBB_connect) "mkdir /home/debian/bin/release"
+	scp $(OUTPUT) $(BBB_connect):/home/debian/bin/release
+
+build-lib:
+	ar rcs my_library.a sourcefiles/memory.c sourcefiles/data.c	
+
 .PHONY: clean asm-file preprocess compile-all build 
 
 clean:
-	rm $(objects) $(asmfiles) 
+	rm -f $(objects) $(asmfiles) *.i *.map *.s *.a $(OUTPUT)
+
 
  
