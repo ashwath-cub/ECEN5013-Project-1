@@ -5,26 +5,59 @@ vpath %.h headers
 
 
 objects= main.o project.o data.o memory.o
+platform=GCC;
+CC=gcc
+CFLAGS=-Wall -g
+LDFLAGS=-Wl,-Map=
+prepocessed= main.i project.i data.i memory.i
+asmfiles= main.s project.s data.s memory.s
 
-ifeq()
-CC=cc;
-CFLAGS=-Wall 
 
-if(target==bbb)
+ifeq ($(platform), ARM_LINUX)
+CC= arm-linux-gnueabi-gcc 
+else($(platform), ARM_NONE)
+CC= arm-none-eabi-gcc
+endif
 
-default: host
+build: $(objects)
+	$(CC) $(objects) -o project $(LDFLAGS)project.map
 
-host: $(objects)
-	cc -o host $(objects)
+compile-all: $(objects)
+
 main.o: main.c project.h
-	cc -c $<
-project.o: project.c memory.h
-	cc -c $<
+	$(CC) -c $(CFLAGS) $< 
+project.o: project.c memory.h project.h
+	$(CC) -c $(CFLAGS) $<
 memory.o: memory.c memory.h
-	cc -c $<
+	$(CC) -c $(CFLAGS) $<
+data.o: data.c data.h memory.h
+	$(CC) -c $(CFLAGS) $<
 
+preprocess: $(preprocessed)
+	
+main.i: main.c project.h 
+	$(CC) -E $<
+project.i: project.c memory.h project.h
+	$(CC) -E $<
+memory.i: memory.c memory.h 
+	$(CC) -E $<
+data.i: data.c data.h memory.h
+	$(CC) -E $<
+
+asm-file: $(asmfiles)
+
+main.S: main.c project.h
+	$(CC) -S $<
+project.S: project.c memory.h project.h
+	$(CC) -S $<
+memory.S: memory.c memory.h
+	$(CC) -S $<
+data.S: data.c data.h memory.h
+	$(CC) -S $<
+	
+.PHONY: clean asm-file preprocess compile-all build 
 
 clean:
-	rm host $(objects)
+	rm $(objects) $(asmfiles) 
 
-
+ 

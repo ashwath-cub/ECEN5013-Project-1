@@ -3,9 +3,10 @@
 #include<stdlib.h>
 #include "../headers/project.h"
 
-void main()
+int main()
 {
-project_1_report();
+   project_1_report();
+   return 0;
 }
 
 
