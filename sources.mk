@@ -8,7 +8,7 @@ CFLAGS=-Wall -g -O0
 LDFLAGS=-Wl,-Map=
 prepocessed= main.i project.i data.i memory.i
 asmfiles= main.s project.s data.s memory.s
-BBB_address=root@192.168.7.2
+BBB_connect=root@192.168.7.2
 OUTPUT=project
 
 
